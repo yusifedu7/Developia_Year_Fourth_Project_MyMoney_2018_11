@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="631.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.main.view.main.MainController">
+   <children>
+      <HBox prefHeight="600.0" prefWidth="750.0">
+         <children>
+            <VBox prefHeight="600.0" prefWidth="210.0" style="-fx-background-color: #ff0000;">
+               <children>
+                  <Label alignment="CENTER" prefHeight="38.0" prefWidth="206.0" text="Menyu" textFill="#d4ff00">
+                     <font>
+                        <Font name="System Bold" size="26.0" />
+                     </font>
+                  </Label>
+                  <Accordion prefHeight="559.0" prefWidth="210.0">
+                    <panes>
+                      <TitledPane text="Gəlirlər">
+                        <content>
+                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #ff0000;">
+                                 <children>
+                                    <ListView fx:id="incomeList" layoutX="6.0" layoutY="12.0" onMousePressed="#incomeListPressed" prefHeight="278.0" prefWidth="193.0" />
+                                    <HBox alignment="CENTER" layoutX="7.0" layoutY="300.0" prefHeight="44.0" prefWidth="189.0" spacing="3.0">
+                                       <children>
+                                          <Button fx:id="newButton" mnemonicParsing="false" onAction="#newButtonPressed" text="Yeni" />
+                                          <Button fx:id="editButton" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#editButtonPressed" text="Redaktə" />
+                                          <Button fx:id="deleteButton" layoutX="61.0" layoutY="10.0" mnemonicParsing="false" onAction="#deleteButtonPressed" text="Sil" />
+                                       </children>
+                                    </HBox>
+                                    <HBox layoutX="10.0" layoutY="344.0" prefHeight="44.0" prefWidth="189.0">
+                                       <children>
+                                          <TextField fx:id="incomeTF" prefHeight="31.0" prefWidth="181.0" />
+                                       </children>
+                                    </HBox>
+                                    <Button fx:id="newIncomeRegisterButton" layoutX="22.0" layoutY="386.0" mnemonicParsing="false" onAction="#newIncomeRegisterButtonPressed" prefHeight="31.0" prefWidth="153.0" text="Yeni gəlir qeydiyyatı" textFill="#0d00ff">
+                                       <font>
+                                          <Font name="System Bold" size="13.0" />
+                                       </font>
+                                    </Button>
+                                 </children>
+                              </AnchorPane>
+                        </content>
+                           <font>
+                              <Font name="System Bold" size="20.0" />
+                           </font>
+                      </TitledPane>
+                      <TitledPane onMouseReleased="#expensePressed" text="Xərclər">
+                            <content>
+                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #ff0000;">
+                                 <children>
+                                    <ListView fx:id="expenseList" layoutX="6.0" layoutY="12.0" onMousePressed="#expenseListPressed" prefHeight="278.0" prefWidth="193.0" />
+                                    <HBox alignment="CENTER" layoutX="7.0" layoutY="300.0" prefHeight="44.0" prefWidth="189.0" spacing="3.0">
+                                       <children>
+                                          <Button fx:id="expenseNewButton" mnemonicParsing="false" onAction="#expenseNewButtonPressed" text="Yeni" />
+                                          <Button fx:id="expenseEditButton" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#expenseEditButtonPressed" text="Redaktə" />
+                                          <Button fx:id="expenseDeleteButton" layoutX="61.0" layoutY="10.0" mnemonicParsing="false" onAction="#expenseDeleteButtonPressed" text="Sil" />
+                                       </children>
+                                    </HBox>
+                                    <HBox layoutX="10.0" layoutY="344.0" prefHeight="44.0" prefWidth="189.0">
+                                       <children>
+                                          <TextField fx:id="expenseTF" prefHeight="31.0" prefWidth="181.0" />
+                                       </children>
+                                    </HBox>
+                                    <Button fx:id="newExpenseRegisterButton" layoutX="22.0" layoutY="386.0" mnemonicParsing="false" onAction="#newExpenseRegisterButtonPressed" prefHeight="31.0" prefWidth="153.0" text="Yeni xərc qeydiyyatı" textFill="#0d00ff">
+                                       <font>
+                                          <Font name="System Bold" size="13.0" />
+                                       </font>
+                                    </Button>
+                                 </children>
+                              </AnchorPane>
+                        </content>
+                           <font>
+                              <Font name="System Bold" size="20.0" />
+                           </font>
+                      </TitledPane>
+                      <TitledPane text="Planlar">
+                           <content>
+                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #ff0000;">
+                                 <children>
+                                    <ListView fx:id="planList" layoutX="6.0" layoutY="12.0" onMousePressed="#planListPressed" prefHeight="278.0" prefWidth="193.0" />
+                                    <HBox alignment="CENTER" layoutX="7.0" layoutY="300.0" prefHeight="44.0" prefWidth="189.0" spacing="3.0">
+                                       <children>
+                                          <Button fx:id="planNewButton" mnemonicParsing="false" onAction="#planNewButtonPressed" text="Yeni" />
+                                          <Button fx:id="planEditButton" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#planEditButtonPressed" text="Redaktə" />
+                                          <Button fx:id="planDeleteButton" layoutX="61.0" layoutY="10.0" mnemonicParsing="false" onAction="#planDeleteButtonPressed" text="Sil" />
+                                       </children>
+                                    </HBox>
+                                    <HBox layoutX="10.0" layoutY="344.0" prefHeight="44.0" prefWidth="189.0">
+                                       <children>
+                                          <TextField fx:id="planTF" prefHeight="31.0" prefWidth="181.0" />
+                                       </children>
+                                    </HBox>
+                                    <Button fx:id="newPlanRegisterButton" layoutX="22.0" layoutY="386.0" mnemonicParsing="false" onAction="#newPlanRegisterButtonPressed" prefHeight="31.0" prefWidth="153.0" text="Yeni plan qeydiyyatı" textFill="#0d00ff">
+                                       <font>
+                                          <Font name="System Bold" size="13.0" />
+                                       </font>
+                                    </Button>
+                                 </children>
+                              </AnchorPane>
+                        </content>
+                           <font>
+                              <Font name="System Bold" size="20.0" />
+                           </font>
+                      </TitledPane>
+                    </panes>
+                  </Accordion>
+               </children>
+            </VBox>
+            <VBox fx:id="rightVBox" prefHeight="600.0" prefWidth="540.0" style="-fx-background-color: #00ff00;">
+               <children>
+                  <PieChart prefHeight="195.0" prefWidth="540.0" style="-fx-background-color: #444444;" />
+                  <ListView fx:id="planExpensesList" prefHeight="340.0" prefWidth="540.0" />
+               </children></VBox>
+         </children>
+      </HBox>
+      <Label fx:id="warningsLabel" layoutX="14.0" layoutY="609.0" text="Xəbərdarlıq" textFill="#f20000">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
