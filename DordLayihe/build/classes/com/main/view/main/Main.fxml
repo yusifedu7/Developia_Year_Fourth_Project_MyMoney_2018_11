@@ -114,8 +114,8 @@
             </VBox>
             <VBox fx:id="rightVBox" prefHeight="600.0" prefWidth="540.0" style="-fx-background-color: #00ff00;">
                <children>
-                  <PieChart prefHeight="195.0" prefWidth="540.0" style="-fx-background-color: #444444;" />
-                  <ListView fx:id="planExpensesList" prefHeight="340.0" prefWidth="540.0" />
+                  <PieChart fx:id="expenseStatuses" prefHeight="276.0" prefWidth="540.0" style="-fx-background-color: #fff888;" />
+                  <ListView fx:id="planExpensesList" prefHeight="320.0" prefWidth="540.0" />
                </children></VBox>
          </children>
       </HBox>

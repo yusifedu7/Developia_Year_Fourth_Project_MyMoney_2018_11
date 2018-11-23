@@ -4,7 +4,9 @@ import com.main.db.DB;
 import com.main.view.main.expense.ExpenseController;
 import com.main.view.main.income.IncomeController;
 import com.main.view.main.newplan.NewPlanController;
+import com.sun.javafx.scene.control.skin.CustomColorDialog;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -19,14 +21,20 @@ import javafx.scene.chart.PieChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class MainController implements Initializable {
     @FXML
     VBox   rightVBox;
+    
+    
+    @FXML
+    PieChart expenseStatuses;
     @FXML
     Label warningsLabel;
     
@@ -38,16 +46,15 @@ public class MainController implements Initializable {
     
     @FXML
     private Button planDeleteButton;
-    private boolean chartHasShow=false;
+   
     
     @FXML
     public void expensePressed(MouseEvent event){
         
-        if(chartHasShow==false){
-            chartHasShow=true;
+     
             
             
-               PieChart pieChart=new PieChart();
+                
         ObservableList<PieChart.Data> list=FXCollections.observableArrayList();
         
         
@@ -58,14 +65,14 @@ public class MainController implements Initializable {
         }
         
            
-           pieChart.setData(list);
-           rightVBox.getChildren().add(pieChart);
+           expenseStatuses.setData(list);
+       
         
         
          
            
             
-        }
+   
      
         
         
@@ -348,8 +355,45 @@ public class MainController implements Initializable {
             int id=Integer.parseInt(db.getColumnSingleRowFromTable("plans", "id", "where name='"+selected+"'"));
             
             ArrayList<String> list=db.getColumnRowsFromTable("plandetails", "category", " where planid="+id+" ");
+            
+              ArrayList<String> amounts=db.getColumnRowsFromTable("plandetails", "amount", " where planid="+id+" ");
+            
+            LocalDate beginDate=db.getColumnLocalDateSingleRowFromTable("plans", "beginDate", "where id= "+id+" ");
+            
+              LocalDate endDate=db.getColumnLocalDateSingleRowFromTable("plans", "endDate", "where id= "+id+" ");
+              
+              
+              
               planExpensesList.getItems().clear();
-            planExpensesList.getItems().addAll(list);
+              
+              for (int i = 0; i < list.size(); i++) {
+                 HBox hb=new HBox();  
+                 Label name=new Label(list.get(i)+" : ");
+                    Label amount=new Label("Ayrılmış pul : "+amounts.get(i) );
+                    
+                    
+                  
+                     
+                    // qayeqoriyanin xerclenen pulu
+                    double spended=db.getSumColumnValuesFromTable("expense", "amount", "where (category='"+list.get(i)+"' and (date between '"+beginDate.toString()+"' and '"+endDate.toString()+"'))");
+                   // ayrilmis pul
+                   
+                      Label spendedLabel=new Label("Xərclənən pul : "+spended );
+                      
+                      
+                    double amountDouble=Double.parseDouble(amounts.get(i));
+                    
+                    double percent=spended/amountDouble;
+                   
+                  ProgressBar pb=new ProgressBar(percent); if(percent>1){
+                        pb.setStyle("-fx-accent: red");
+                    }else{
+                        pb.setStyle("-fx-accent: blue");
+                  }
+                 hb.getChildren().addAll(name,amount,pb,spendedLabel);
+                 planExpensesList.getItems().add(hb);
+            }
+        
             
         }
     }
@@ -416,7 +460,7 @@ public class MainController implements Initializable {
         
     }
 @FXML
-private ListView<String> planExpensesList;
+private ListView<HBox> planExpensesList;
 
     private void loadIncomeCategory() {
         incomeList.getItems().clear();

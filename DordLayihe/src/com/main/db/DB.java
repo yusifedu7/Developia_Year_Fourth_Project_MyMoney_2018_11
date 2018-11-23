@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class DB {
@@ -152,4 +153,31 @@ public class DB {
         return max;
 
     }
+    
+    
+     public  LocalDate  getColumnLocalDateSingleRowFromTable(String table, String column, String condition) {
+       LocalDate  ld   =null;
+
+        try {
+            Statement s = cn.createStatement();
+            ResultSet r = s.executeQuery("select " + column + " from " + table + " " + condition);
+
+           r.next();
+           
+                ld=   r.getDate(column).toLocalDate();
+        
+
+            r.close();
+            s.close();
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+        return ld;
+
+    }
+     
+     
+     
 }
