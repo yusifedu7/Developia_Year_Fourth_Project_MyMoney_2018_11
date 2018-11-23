@@ -6,6 +6,7 @@
 package com.main.view.main.income;
 
 import com.main.db.DB;
+import com.main.view.main.MainController;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
@@ -28,6 +29,18 @@ import javafx.stage.Stage;
 public class IncomeController implements Initializable {
 private String incomeCategory;
 private Stage thisStage;
+
+private MainController mainController;
+
+    public MainController getMainController() {
+        return mainController;
+    }
+
+    public void setMainController(MainController mainController) {
+        this.mainController = mainController;
+    }
+
+
 
     public Stage getThisStage() {
         return thisStage;
@@ -94,13 +107,13 @@ private DB db=DB.getInstange();
                         
                         try {
                             msg("Uğurlu");
-                            
+                         
                             
                             double balance=Double.parseDouble(db.getColumnRowsFromTable("info", "v", "where k='balance'").get(0));
                             balance+=amount;
                             
                             db.iud("update info set v='"+balance+"' where k='balance'");
-                            
+                               mainController.refreshBalance();
                             Thread.sleep(500);
                         } catch (InterruptedException ex) {
                             Logger.getLogger(IncomeController.class.getName()).log(Level.SEVERE, null, ex);

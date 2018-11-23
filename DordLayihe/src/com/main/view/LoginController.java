@@ -13,6 +13,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public class LoginController implements Initializable {
@@ -46,7 +47,7 @@ public class LoginController implements Initializable {
                 try {
                     Stage stage = new Stage();
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("main/Main.fxml"));
-
+stage.initModality(Modality.APPLICATION_MODAL);
                     Parent root = loader.load();
                     Scene scene = new Scene(root);
                     stage.setScene(scene);

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="516.0" prefWidth="690.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="com.main.view.report.ExpenseReportController">
+   <children>
+      <VBox layoutX="7.0" prefHeight="516.0" prefWidth="682.0">
+         <children>
+            <HBox prefHeight="42.0" prefWidth="591.0">
+               <children>
+                  <Label text="Baş tarix : " textFill="RED">
+                     <font>
+                        <Font name="System Bold" size="28.0" />
+                     </font>
+                  </Label>
+                  <DatePicker fx:id="beginDateDP" prefHeight="36.0" prefWidth="146.0" />
+                  <Label layoutX="10.0" layoutY="10.0" text="Son tarix : " textFill="RED">
+                     <font>
+                        <Font name="System Bold" size="28.0" />
+                     </font>
+                  </Label>
+                  <DatePicker fx:id="endDateDP" layoutX="147.0" layoutY="10.0" prefHeight="36.0" prefWidth="146.0" />
+               </children>
+            </HBox>
+            <HBox layoutX="10.0" layoutY="10.0" prefHeight="48.0" prefWidth="682.0">
+               <children>
+                  <Button fx:id="filterButton" mnemonicParsing="false" onAction="#filterButtonPressed" prefHeight="43.0" prefWidth="224.0" text="Filtr et">
+                     <font>
+                        <Font name="System Bold" size="23.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
+            <HBox layoutX="10.0" layoutY="52.0" prefHeight="37.0" prefWidth="682.0" />
+            <TableView fx:id="expenseReportTable" onMousePressed="#expenseReportTablePressed" prefHeight="263.0" prefWidth="682.0">
+              <columns>
+                <TableColumn fx:id="idCol" prefWidth="60.0" text="İD" />
+                <TableColumn fx:id="noteCol" prefWidth="286.0" text="Qeyd" />
+                  <TableColumn fx:id="amountCol" prefWidth="110.0" text="Məbləğ" />
+                  <TableColumn fx:id="categoryCol" prefWidth="119.0" text="Kateqoriya" />
+                  <TableColumn fx:id="dateCol" prefWidth="100.0" text="Tarix" />
+              </columns>
+            </TableView>
+            <HBox prefHeight="55.0" prefWidth="682.0">
+               <children>
+                  <Label text="Sətir sayı : " textFill="#2300ff">
+                     <font>
+                        <Font name="System Bold" size="21.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="rowCountLabel" layoutX="10.0" layoutY="10.0" prefHeight="31.0" prefWidth="154.0" text="0" textFill="RED">
+                     <font>
+                        <Font name="System Bold" size="21.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

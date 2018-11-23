@@ -1,11 +1,15 @@
 package com.main.db;
 
+import com.main.view.report.ExpenseReportBean;
+import com.main.view.report.IncomeReportBean;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 public class DB {
 
@@ -179,5 +183,82 @@ public class DB {
     }
      
      
+     
+     
+     public ObservableList<IncomeReportBean> getIncomes(String condition){
+         
+          ObservableList<IncomeReportBean>  list=FXCollections.observableArrayList();
+          
+           try {
+            Statement s = cn.createStatement();
+            ResultSet r = s.executeQuery("select * from income " + condition);
+
+           while(r.next()){
+               IncomeReportBean i=new IncomeReportBean(r.getInt("id"), r.getString("note"), r.getDouble("amount"), r.getString("category"), r.getDate("date").toLocalDate());
+               list.add(i);
+           }
+            
+
+            r.close();
+            s.close();
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+          
+          
+          
+          
+          
+          return list;
+         
+         
+         
+         
+         
+         
+         
+         
+     }
+     
+     
+       public ObservableList<ExpenseReportBean> getExpenses(String condition){
+         
+          ObservableList<ExpenseReportBean>  list=FXCollections.observableArrayList();
+          
+           try {
+            Statement s = cn.createStatement();
+            ResultSet r = s.executeQuery("select * from expense " + condition);
+
+           while(r.next()){
+               ExpenseReportBean i=new ExpenseReportBean(r.getInt("id"), r.getString("note"), r.getDouble("amount"), r.getString("category"), r.getDate("date").toLocalDate());
+               list.add(i);
+           }
+            
+
+            r.close();
+            s.close();
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+          
+          
+          
+          
+          
+          return list;
+         
+         
+         
+         
+         
+         
+         
+         
+     }
+       
+       
+       
      
 }

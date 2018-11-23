@@ -7,6 +7,7 @@ import com.main.view.main.newplan.NewPlanController;
 import com.sun.javafx.scene.control.skin.CustomColorDialog;
 import java.net.URL;
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -26,6 +27,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public class MainController implements Initializable {
@@ -66,7 +68,7 @@ public class MainController implements Initializable {
         
            
            expenseStatuses.setData(list);
-       
+       expenseStatuses.setTitle("Bütün xərclərin kateqoriyalara görə faizləri");
         
         
          
@@ -79,6 +81,46 @@ public class MainController implements Initializable {
         
     }
     
+    
+    @FXML
+    public void incomeReportButtonPressed(ActionEvent event){
+         try {
+                Stage stage = new Stage();
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/main/view/report/IncomeReport.fxml"));
+                stage.initModality(Modality.APPLICATION_MODAL);
+                Parent root = loader.load();
+                Scene scene = new Scene(root);
+                stage.setScene(scene);
+                stage.show();
+                
+               
+                
+                
+                
+                
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+    }  @FXML
+    public void expenseReportButtonPressed(ActionEvent event){
+         try {
+                Stage stage = new Stage();
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/main/view/report/ExpenseReport.fxml"));
+                stage.initModality(Modality.APPLICATION_MODAL);
+                Parent root = loader.load();
+                Scene scene = new Scene(root);
+                stage.setScene(scene);
+                stage.show();
+                
+               
+                
+                
+                
+                
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+    }
     
     
     @FXML
@@ -220,7 +262,7 @@ public class MainController implements Initializable {
             try {
                 Stage stage = new Stage();
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("income/Income.fxml"));
-                
+                stage.initModality(Modality.APPLICATION_MODAL);
                 Parent root = loader.load();
                 Scene scene = new Scene(root);
                 stage.setScene(scene);
@@ -229,6 +271,10 @@ public class MainController implements Initializable {
                 IncomeController c = loader.getController();
                 c.setIncomeCategory(selected);
                 c.setThisStage(stage);
+                c.setMainController(this);
+                
+                
+                
                 
             } catch (Exception ex) {
                 ex.printStackTrace();
@@ -328,7 +374,7 @@ public class MainController implements Initializable {
             try {
                 Stage stage = new Stage();
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("expense/Expense.fxml"));
-                
+                stage.initModality(Modality.APPLICATION_MODAL);
                 Parent root = loader.load();
                 Scene scene = new Scene(root);
                 stage.setScene(scene);
@@ -337,7 +383,7 @@ public class MainController implements Initializable {
                 ExpenseController c = loader.getController();
                 c.setExpenseCategory(selected);
                 c.setThisStage(stage);
-                
+                c.setMainController(this);
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
@@ -368,7 +414,15 @@ public class MainController implements Initializable {
               
               for (int i = 0; i < list.size(); i++) {
                  HBox hb=new HBox();  
+                 
+                 
+                 
+                
+                 
                  Label name=new Label(list.get(i)+" : ");
+                 name.setStyle("-fx-font-size:20px;-fx-text-fill: rgb(255,0,0);");
+               
+                 
                     Label amount=new Label("Ayrılmış pul : "+amounts.get(i) );
                     
                     
@@ -385,11 +439,27 @@ public class MainController implements Initializable {
                     
                     double percent=spended/amountDouble;
                    
-                  ProgressBar pb=new ProgressBar(percent); if(percent>1){
+                  ProgressBar pb=new ProgressBar(percent); 
+                  
+                  
+                  if(percent>1){
                         pb.setStyle("-fx-accent: red");
                     }else{
                         pb.setStyle("-fx-accent: blue");
                   }
+                  
+                  
+                    Label forecast=new Label(list.get(i)+" : ");
+                    
+                    // 
+                  // 10 
+                  // 3  
+                  // amount
+                  
+                // 
+              long aradaki =ChronoUnit.DAYS.between(beginDate, endDate);
+              
+                  
                  hb.getChildren().addAll(name,amount,pb,spendedLabel);
                  planExpensesList.getItems().add(hb);
             }
@@ -418,7 +488,7 @@ public class MainController implements Initializable {
          try {
                 Stage stage = new Stage();
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("newplan/NewPlan.fxml"));
-                
+                stage.initModality(Modality.APPLICATION_MODAL);
                 Parent root = loader.load();
                 Scene scene = new Scene(root);
                 stage.setScene(scene);
@@ -437,7 +507,7 @@ public class MainController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
+        refreshBalance();
         loadIncomeCategory();
         
       
@@ -472,11 +542,21 @@ private ListView<HBox> planExpensesList;
 
     public  void loadAllPlans() {
      
-    
+    // 2018-11-22
        planList.getItems().clear();
-         planList.getItems().addAll(db.getColumnRowsFromTable("plans", "name", ""));
+         planList.getItems().addAll(db.getColumnRowsFromTable("plans", "name", " where endDate>'"+LocalDate.now().toString()+"'"));
     
     
     }
+    @FXML
+    Label currentBalanceLabel;
+    
+    
+    
+    public void refreshBalance(){
+        String b=db.getColumnSingleRowFromTable("info", "v", "where k='balance'");
+        currentBalanceLabel.setText(b);
+    }
+    
     
 }

@@ -6,6 +6,7 @@
 package com.main.view.main.expense;
 
 import com.main.db.DB;
+import com.main.view.main.MainController;
 import com.main.view.main.income.IncomeController;
 import java.net.URL;
 import java.time.LocalDate;
@@ -27,7 +28,15 @@ import javafx.stage.Stage;
  * @author Yusif
  */
 public class ExpenseController implements Initializable {
+private MainController mainController;
 
+    public MainController getMainController() {
+        return mainController;
+    }
+
+    public void setMainController(MainController mainController) {
+        this.mainController = mainController;
+    }
 private Stage thisStage;
 private String expenseCategory;
 
@@ -102,7 +111,7 @@ private DB db=DB.getInstange();
                             balance-=amount;
                             
                             db.iud("update info set v='"+balance+"' where k='balance'");
-                            
+                            mainController.refreshBalance();
                             Thread.sleep(500);
                         } catch (InterruptedException ex) {
                             Logger.getLogger(IncomeController.class.getName()).log(Level.SEVERE, null, ex);
