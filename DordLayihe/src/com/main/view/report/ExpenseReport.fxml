@@ -7,8 +7,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="516.0" prefWidth="690.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="com.main.view.report.ExpenseReportController">
+<AnchorPane id="AnchorPane" prefHeight="516.0" prefWidth="690.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.main.view.report.ExpenseReportController">
    <children>
       <VBox layoutX="7.0" prefHeight="516.0" prefWidth="682.0">
          <children>
@@ -55,6 +54,16 @@
                      </font>
                   </Label>
                   <Label fx:id="rowCountLabel" layoutX="10.0" layoutY="10.0" prefHeight="31.0" prefWidth="154.0" text="0" textFill="RED">
+                     <font>
+                        <Font name="System Bold" size="21.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="10.0" layoutY="10.0" text="Cəm məbləğ : " textFill="#2300ff">
+                     <font>
+                        <Font name="System Bold" size="21.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="totalAmountLabel" layoutX="117.0" layoutY="10.0" prefHeight="31.0" prefWidth="154.0" text="0" textFill="RED">
                      <font>
                         <Font name="System Bold" size="21.0" />
                      </font>

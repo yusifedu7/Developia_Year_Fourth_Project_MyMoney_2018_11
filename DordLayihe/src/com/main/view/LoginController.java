@@ -2,6 +2,8 @@ package com.main.view;
 
 import com.main.db.DB;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -13,6 +15,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Tooltip;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -35,6 +38,22 @@ public class LoginController implements Initializable {
     @FXML
     private Button enterButton;
 
+    
+    public void helpButtonPressed(ActionEvent event)
+    {
+         try {
+                    Stage stage = new Stage();
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("help/Help.fxml"));
+stage.initModality(Modality.APPLICATION_MODAL);
+                    Parent root = loader.load();
+                    Scene scene = new Scene(root);
+                    stage.setScene(scene);
+                    stage.show();
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+    }
+    
     @FXML
     void enterButtonPressed(ActionEvent event) {
 
@@ -92,12 +111,27 @@ stage.initModality(Modality.APPLICATION_MODAL);
     }
 
     public void deleteAccountButtonPressed(ActionEvent event) {
-        db.iud("truncate table users");// bu kod users cedvelini tam silir, 
+        
+      
+        
+        String[] array={"users","income","expense","plandetails","plans"};
+        
+        
+           
+          ArrayList<String> arrayList = new ArrayList<String>(Arrays.asList(array));
+
+           
+        db.truncateTable(arrayList);
+        db.iud("update info set v='0' where k='balance'");
+        
+         
         createAccountButton.setVisible(true);
     }
 
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
+    public void initialize(URL url, ResourceBundle rb) { 
+                enterButton.setTooltip(new Tooltip("Bu düymə giriş üçündür"));
+                 
         if (db.hasRowInTableForThisCondition("users", "")) {
             createAccountButton.setVisible(false);
         }

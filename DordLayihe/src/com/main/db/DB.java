@@ -34,6 +34,15 @@ public class DB {
 
     }
 
+    public void truncateTable(ArrayList<String> tableNames){
+        
+        for (int i = 0; i < tableNames.size(); i++) {
+             iud("truncate table "+tableNames.get(i)+" ");
+        }
+       
+    }
+    
+    
     public boolean iud(String query) {
         boolean result = false;
         try {
@@ -210,18 +219,8 @@ public class DB {
           
           
           
-          return list;
-         
-         
-         
-         
-         
-         
-         
-         
-     }
-     
-     
+          return list;  
+     } 
        public ObservableList<ExpenseReportBean> getExpenses(String condition){
          
           ObservableList<ExpenseReportBean>  list=FXCollections.observableArrayList();

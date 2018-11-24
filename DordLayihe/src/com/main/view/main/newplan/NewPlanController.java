@@ -17,8 +17,18 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
  
 public class NewPlanController implements Initializable {
+private Stage thisStage;
+
+    public Stage getThisStage() {
+        return thisStage;
+    }
+
+    public void setThisStage(Stage thisStage) {
+        this.thisStage = thisStage;
+    }
 
     
     public MainController controller;
@@ -111,7 +121,7 @@ amountTF.setText("");
                    }else{ 
                        db.iud("insert into plans (name,beginDate,endDate,totalAmount) values ('"+name+"','"+beginDate.toString()+"','"+endDate.toString()+"','"+totalAmount+"')");
                        controller.loadAllPlans();
-                       
+                      
                        int max=db.getMaxColumnValueFromTable("plans", "id");
                        
                        
@@ -122,7 +132,7 @@ amountTF.setText("");
                        
                        
                         msg("Ugurlu");
-                        
+                         thisStage.close();
                        
                        
                        

@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.main.view.report;
 
 import com.main.db.DB;
@@ -22,7 +18,9 @@ import javafx.scene.input.MouseEvent;
 
 public class ExpenseReportController implements Initializable {
 
-   
+   @FXML
+        Label totalAmountLabel;
+        
     @FXML
     private DatePicker endDateDP;
 
@@ -91,6 +89,19 @@ public class ExpenseReportController implements Initializable {
          expenseReportTable.setItems(db.getExpenses(condition));
          
          rowCountLabel.setText(""+expenseReportTable.getItems().size());
+         
+         
+         
+         double total=0;
+         
+         for (int i = 0; i < expenseReportTable.getItems().size(); i++) {
+            
+             total+=expenseReportTable.getItems().get(i).getAmount();
+             
+             
+        }
+         totalAmountLabel.setText(String.valueOf(total));
+         
          
     }
 

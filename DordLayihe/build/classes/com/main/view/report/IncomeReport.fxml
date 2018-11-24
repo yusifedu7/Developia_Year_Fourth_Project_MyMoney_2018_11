@@ -59,6 +59,19 @@
                         <Font name="System Bold" size="21.0" />
                      </font>
                   </Label>
+                  
+                  
+                   <Label layoutX="10.0" layoutY="10.0" text="Cəm məbləğ : " textFill="#2300ff">
+                     <font>
+                        <Font name="System Bold" size="21.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="totalAmountLabel" layoutX="117.0" layoutY="10.0" prefHeight="31.0" prefWidth="154.0" text="0" textFill="RED">
+                     <font>
+                        <Font name="System Bold" size="21.0" />
+                     </font>
+                  </Label>
+                  
                </children>
             </HBox>
          </children>

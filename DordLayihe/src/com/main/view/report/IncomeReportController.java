@@ -26,7 +26,8 @@ import javafx.scene.input.MouseEvent;
  * @author Yusif
  */
 public class IncomeReportController implements Initializable {
-
+   @FXML
+        Label totalAmountLabel;
    
     @FXML
     private DatePicker endDateDP;
@@ -96,7 +97,15 @@ public class IncomeReportController implements Initializable {
          IncomeReportTable.setItems(db.getIncomes(condition));
          
          rowCountLabel.setText(""+IncomeReportTable.getItems().size());
+          double total=0;
          
+         for (int i = 0; i < IncomeReportTable.getItems().size(); i++) {
+            
+             total+=IncomeReportTable.getItems().get(i).getAmount();
+             
+             
+        }
+         totalAmountLabel.setText(String.valueOf(total));
     }
 
     @FXML

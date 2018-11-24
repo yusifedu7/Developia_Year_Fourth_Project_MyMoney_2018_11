@@ -43,17 +43,22 @@
                <children>
                   <Button fx:id="enterButton" mnemonicParsing="false" onAction="#enterButtonPressed" text="Daxil ol">
                      <font>
-                        <Font name="System Bold" size="21.0" />
+                        <Font name="System Bold" size="15.0" />
                      </font>
                   </Button>
                   <Button fx:id="createAccountButton" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#createAccountButtonPressed" text="Hesab yarat">
                      <font>
-                        <Font name="System Bold" size="21.0" />
+                        <Font name="System Bold" size="15.0" />
                      </font>
                   </Button>
                   <Button fx:id="deleteAccountButton" layoutX="118.0" layoutY="10.0" mnemonicParsing="false" onAction="#deleteAccountButtonPressed" text="Hesabı sil">
                      <font>
-                        <Font name="System Bold" size="21.0" />
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="helpButton" layoutX="198.0" layoutY="10.0" mnemonicParsing="false" onAction="#helpButtonPressed" text="Kömək">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
                      </font>
                   </Button>
                </children>

@@ -36,6 +36,10 @@ public class MainController implements Initializable {
     
     
     @FXML
+    Label beginDateLabel,endDateLabel,planAmountLabel;
+    
+    
+    @FXML
     PieChart expenseStatuses;
     @FXML
     Label warningsLabel;
@@ -407,9 +411,21 @@ public class MainController implements Initializable {
             LocalDate beginDate=db.getColumnLocalDateSingleRowFromTable("plans", "beginDate", "where id= "+id+" ");
             
               LocalDate endDate=db.getColumnLocalDateSingleRowFromTable("plans", "endDate", "where id= "+id+" ");
+              beginDateLabel.setText(beginDate.toString());
+                   endDateLabel.setText(endDate.toString());
               
-              
-              
+                   double totalPlanAmount=0;
+                   for (int i = 0; i < amounts.size(); i++) {
+                totalPlanAmount+=Double.parseDouble(amounts.get(i));
+            }
+                   
+                   
+                   
+                   planAmountLabel.setText(String.valueOf(totalPlanAmount));
+                   
+                   
+                   
+                   
               planExpensesList.getItems().clear();
               
               for (int i = 0; i < list.size(); i++) {
@@ -420,6 +436,7 @@ public class MainController implements Initializable {
                 
                  
                  Label name=new Label(list.get(i)+" : ");
+                 
                  name.setStyle("-fx-font-size:20px;-fx-text-fill: rgb(255,0,0);");
                
                  
@@ -449,18 +466,35 @@ public class MainController implements Initializable {
                   }
                   
                   
-                    Label forecast=new Label(list.get(i)+" : ");
+                    Label forecast=new Label( );
                     
-                    // 
-                  // 10 
-                  // 3  
-                  // amount
+             
+              long planDayCount =ChronoUnit.DAYS.between(  beginDate,endDate);
+                  System.out.println(planDayCount);
+              long lastDays =
+              ChronoUnit.DAYS.between(  beginDate,LocalDate.now());
+                System.out.println(lastDays);
+              lastDays++;
+              
+              double normalSpendInOneDay=amountDouble/planDayCount;
+              
+              double normalSpendAmount=normalSpendInOneDay*lastDays;
+              
+              if(spended>normalSpendAmount){
+                  forecast.setText("Xərcin tempi-Pis");
                   
-                // 
-              long aradaki =ChronoUnit.DAYS.between(beginDate, endDate);
+                    forecast.setStyle("-fx-font-size:14px;-fx-text-fill: rgb(255,0,0);");
+                  
+              }else{
+                          forecast.setText("Xərcin tempi-Yaxşı");
+                            forecast.setStyle("-fx-font-size:14px;-fx-text-fill: rgb(0,255,0);");
+              }
+              
+              
+              
               
                   
-                 hb.getChildren().addAll(name,amount,pb,spendedLabel);
+                 hb.getChildren().addAll(name,amount,pb,spendedLabel,forecast);
                  planExpensesList.getItems().add(hb);
             }
         
@@ -496,6 +530,7 @@ public class MainController implements Initializable {
                 
                 NewPlanController controller=loader.getController();
                 controller.controller=this;
+                controller.setThisStage(stage);
               
                 
             } catch (Exception ex) {
