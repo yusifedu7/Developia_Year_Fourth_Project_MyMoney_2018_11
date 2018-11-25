@@ -25,7 +25,7 @@ public class DB {
 
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            cn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/layihe4", "yusif1", "1234");
+            cn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/layihe_java_1_ci_il_2018_11_24", "yusif1", "1234");
 
             System.out.println("Success connection...");
         } catch (Exception ex) {
